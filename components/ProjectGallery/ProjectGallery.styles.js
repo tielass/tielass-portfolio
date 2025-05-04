@@ -169,17 +169,35 @@ export const LightboxOverlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 1rem;
 `;
 
 export const LightboxContent = styled.div`
   position: relative;
   background-color: rgb(20, 20, 20);
-  padding: 4rem 0;
+  padding: 4rem 0 1.5rem;
   border-radius: 8px;
-  width: 70%;
-  height: 85%;
+  width: 95%;
+  height: 90%;
   display: flex;
-  // overflow: hidden;
+  overflow: hidden;
+  align-items: flex-start; /* Align both containers to the top */
+
+  @media (min-width: 768px) {
+    width: 90%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 85%;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 2rem 0 2rem;
+    height: auto;
+    max-height: 90%;
+  }
 `;
 
 export const LightboxImageContainer = styled.div`
@@ -187,12 +205,33 @@ export const LightboxImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
+  padding: 0 1.5rem 1rem;
+  justify-content: flex-start; /* Align to top instead of center */
+  min-height: 0;
+  padding-top: 1rem; /* Add top padding */
 
   img {
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 100%;
+    max-height: 55vh;
     border-radius: 8px;
+    object-fit: contain;
+
+    &.portrait {
+      max-height: 45vh;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding-bottom: 1.5rem;
+    padding-top: 0.5rem; /* Less top padding on mobile */
+
+    img {
+      max-height: 38vh;
+
+      &.portrait {
+        max-height: 32vh;
+      }
+    }
   }
 `;
 
@@ -204,6 +243,7 @@ export const LightboxInfoContainer = styled.div`
   text-align: left;
   background-color: rgb(31, 30, 30);
   border-radius: 6px;
+  margin-bottom: 1rem;
 
   h2 {
     font-size: 1.5rem;
@@ -219,21 +259,34 @@ export const LightboxInfoContainer = styled.div`
 
 export const LightboxThumbnails = styled.div`
   display: flex;
-  justify-content: flex-start;
-  gap: 1rem;
-  margin-top: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-bottom: 0.5rem;
+  width: 100%;
 
   img {
     width: auto;
-    height: 80px;
+    height: 65px; /* Slightly smaller thumbnails */
     object-fit: cover;
     border-radius: 4px;
     cursor: pointer;
     transition: transform 0.3s;
+    flex-shrink: 0;
 
     &:hover {
       transform: scale(1.1);
     }
+
+    @media (max-width: 768px) {
+      height: 55px; /* Even smaller on mobile */
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+    gap: 0.5rem; /* Smaller gap on mobile */
   }
 `;
 
@@ -254,31 +307,97 @@ export const LightboxCloseButton = styled.button`
 `;
 
 export const LightboxTitle = styled.h2`
-  font-size: 2rem !important;
+  font-size: 1.75rem;
   color: #ff6b6b;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  word-break: break-word; /* Ensures text wraps instead of overflowing */
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 2rem;
+  }
 `;
 
 export const LightboxDescription = styled.p`
-  font-size: 0.5rem;
+  font-size: 0.875rem;
+  color: #a0a0a0;
+  line-height: 1.5;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export const LightboxRightContainer = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-right: 3rem;
+  padding: 0 1.5rem 1.5rem;
+  padding-top: 1rem; /* Match top padding with image container */
+  max-height: 100%;
+  overflow-y: auto;
+  justify-content: flex-start;
+
+  /* Hide scrollbar but keep functionality */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 107, 107, 0.3) rgba(31, 30, 30, 0.5);
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(31, 30, 30, 0.5);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 107, 107, 0.3);
+    border-radius: 3px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 1.5rem 1.5rem;
+    padding-top: 1.5rem; /* More top padding on mobile between sections */
+    max-height: none;
+    overflow-y: visible;
+  }
 `;
 
 export const LightboxToolsContainer = styled.div`
   display: flex;
-  margin-top: 2rem;
-  flex-wrap: wrap;
+  margin-top: 1rem;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 1rem;
+  gap: 0.75rem;
   padding: 1rem;
   background-color: rgb(31, 30, 30);
   border-radius: 6px;
+  margin-bottom: 1rem;
+
+  &:last-of-type {
+    margin-bottom: 1.5rem; /* Extra margin for the last container */
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #f0f0f0;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
+  }
+
+  div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 `;
 
 export const LightboxTool = styled.div`
@@ -288,15 +407,18 @@ export const LightboxTool = styled.div`
   font-size: 0.75rem;
   background-color: #1a1a1a;
   color: #a0a0a0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
   text-transform: capitalize;
-  margin-right: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
 `;
 
 export const LightboxCloseCircle = styled.div`
   position: absolute;
-  top: -1.5rem;
-  right: -1.5rem;
+  top: 1rem;
+  right: 1rem;
   height: 3rem;
   width: 3rem;
   background-color: rgba(255, 107, 107, 0.1);
@@ -330,9 +452,14 @@ export const LightboxLink = styled.a`
   font-weight: bold;
   font-size: 0.75rem;
   transition: color 0.3s;
+  word-break: break-word; /* Ensures links wrap properly */
 
   &:hover {
     color: #ff6b6b;
     text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
   }
 `;

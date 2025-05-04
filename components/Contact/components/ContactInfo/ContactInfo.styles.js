@@ -81,6 +81,40 @@ export const InfoLink = styled.a`
   }
 `;
 
+export const EmailContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+`;
+
+export const CopyButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1a1a;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.4rem 0.5rem;
+  color: #a0a0a0;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-size: 0.75rem;
+
+  &:hover {
+    background-color: #2a2a2a;
+    color: #ff6b6b;
+  }
+
+  &.copied {
+    background-color: rgba(255, 107, 107, 0.2);
+    color: #ff6b6b;
+  }
+
+  .icon {
+    margin-right: 0.25rem;
+  }
+`;
+
 export const SocialLinks = styled.div`
   display: flex;
   gap: 1.5rem; /* gap-6 in Tailwind CSS */

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import ContactForm from "../ContactForm/ContactForm";
 import Container from "../../../Container"; // Import the universal Container
+import { Copy, Check } from "lucide-react";
 import {
   Grid,
   Title,
@@ -9,6 +10,8 @@ import {
   InfoItem,
   InfoTitle,
   InfoLink,
+  EmailContainer,
+  CopyButton,
   SocialLinks,
   SocialLink,
   FormContainer,
@@ -16,6 +19,21 @@ import {
 } from "./ContactInfo.styles";
 
 const ContactInfo = () => {
+  const [copied, setCopied] = useState(false);
+  const email = "tielass@gmail.com";
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(email).then(
+      () => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      },
+      (err) => {
+        console.error("Could not copy text: ", err);
+      }
+    );
+  };
+
   return (
     <Container>
       {" "}
@@ -45,9 +63,24 @@ const ContactInfo = () => {
             <InfoSection>
               <InfoItem>
                 <InfoTitle>Email</InfoTitle>
-                <InfoLink href="mailto:tielass@gmail.com">
-                  tielass@gmail.com
-                </InfoLink>
+                <EmailContainer>
+                  <InfoLink href={`mailto:${email}`}>{email}</InfoLink>
+                  <CopyButton
+                    onClick={copyToClipboard}
+                    className={copied ? "copied" : ""}
+                    aria-label="Copy email address"
+                  >
+                    {copied ? (
+                      <>
+                        <Check size={14} className="icon" /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={14} className="icon" /> Copy
+                      </>
+                    )}
+                  </CopyButton>
+                </EmailContainer>
               </InfoItem>
 
               <InfoItem>

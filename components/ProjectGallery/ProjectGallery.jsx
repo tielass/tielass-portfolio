@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowUpRight, Code, Palette, PenTool, Tags } from "lucide-react";
 import {
   CategoryButton,
@@ -146,6 +146,29 @@ const ProjectGallery = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(null);
+  const [imageOrientation, setImageOrientation] = useState("landscape");
+
+  // Add effect to prevent body scrolling when lightbox is open
+  useEffect(() => {
+    if (isLightboxOpen) {
+      // Save the current scroll position
+      const scrollY = window.scrollY;
+
+      // Prevent body scrolling
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+
+      return () => {
+        // Restore body scrolling when component unmounts or lightbox closes
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+        // Restore scroll position
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [isLightboxOpen]);
 
   const openLightbox = (project) => {
     setSelectedProject({
@@ -153,6 +176,7 @@ const ProjectGallery = () => {
       additionalImages: [project.image, ...(project.additionalImages || [])],
     });
     setCurrentImage(project.image);
+    checkImageOrientation(project.image); // Check orientation when opening lightbox
     setIsLightboxOpen(true);
   };
 
@@ -160,6 +184,19 @@ const ProjectGallery = () => {
     setSelectedProject(null);
     setCurrentImage(null);
     setIsLightboxOpen(false);
+  };
+
+  // Function to check if an image is portrait or landscape orientation
+  const checkImageOrientation = (imgSrc) => {
+    const img = new Image();
+    img.onload = () => {
+      if (img.height > img.width) {
+        setImageOrientation("portrait");
+      } else {
+        setImageOrientation("landscape");
+      }
+    };
+    img.src = imgSrc.split("?")[0]; // Remove query params
   };
 
   const filteredProjects = activeCategory
@@ -200,7 +237,10 @@ const ProjectGallery = () => {
             key={project.id}
             onMouseEnter={() => setHoveredProject(project.id)}
             onMouseLeave={() => setHoveredProject(null)}
-            onClick={() => openLightbox(project)} // Open lightbox on click
+            onClick={() => {
+              openLightbox(project); // Open lightbox on click
+              checkImageOrientation(project.image);
+            }}
           >
             <ImageContainer>
               <Overlay className="overlay" />
@@ -209,7 +249,7 @@ const ProjectGallery = () => {
                 alt={project.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="image"
+                className={`image ${imageOrientation}`}
               />
               <IconContainer className="icon-container">
                 <IconWrapper>
@@ -237,15 +277,24 @@ const ProjectGallery = () => {
             </LightboxCloseCircle>
             {/* Image on the left */}
             <LightboxImageContainer>
-              <img src={currentImage} alt={selectedProject.title} />
-              {selectedProject.additionalImages?.length > 1 && ( // Render thumbnails only if there are additional images
+              <img
+                src={currentImage.split("?")[0]}
+                alt={selectedProject.title}
+                className={
+                  imageOrientation
+                } /* Apply portrait/landscape class */
+              />
+              {selectedProject.additionalImages?.length > 1 && (
                 <LightboxThumbnails>
                   {selectedProject.additionalImages.map((image, index) => (
                     <img
                       key={index}
-                      src={image}
+                      src={image.split("?")[0]}
                       alt={`Additional ${index + 1}`}
-                      onClick={() => setCurrentImage(image)} // Update the main image
+                      onClick={() => {
+                        setCurrentImage(image);
+                        checkImageOrientation(image); // Check orientation when changing image
+                      }}
                       style={{
                         height:
                           selectedProject.thumbnailDimensions?.height ||
@@ -275,22 +324,6 @@ const ProjectGallery = () => {
                     ))}
                 </LightboxDescription>
               </LightboxInfoContainer>
-              <LightboxToolsContainer>
-                <h3>Tools</h3>
-                <div>
-                  {selectedProject?.tools.map((tool) => (
-                    <LightboxTool key={tool}>{tool}</LightboxTool>
-                  ))}
-                </div>
-              </LightboxToolsContainer>
-              <LightboxToolsContainer>
-                <h3>Tags</h3>
-                <div>
-                  {selectedProject?.tags.map((tag) => (
-                    <CategoryLabel key={tag}>{tag}</CategoryLabel>
-                  ))}
-                </div>
-              </LightboxToolsContainer>
               {/* Link to project */}
               {selectedProject?.link && (
                 <LightboxToolsContainer>
@@ -300,6 +333,25 @@ const ProjectGallery = () => {
                   </LightboxLink>
                 </LightboxToolsContainer>
               )}
+              {/* Tools */}
+              <LightboxToolsContainer>
+                <h3>Tools</h3>
+                <div>
+                  {selectedProject?.tools.map((tool) => (
+                    <LightboxTool key={tool}>{tool}</LightboxTool>
+                  ))}
+                </div>
+              </LightboxToolsContainer>
+              {/* Tags */}
+              <LightboxToolsContainer>
+                <h3>Tags</h3>
+                <div>
+                  {selectedProject?.tags.map((tag) => (
+                    <CategoryLabel key={tag}>{tag}</CategoryLabel>
+                  ))}
+                </div>
+              </LightboxToolsContainer>
+              
             </LightboxRightContainer>
           </LightboxContent>
         </LightboxOverlay>
