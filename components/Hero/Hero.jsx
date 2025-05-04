@@ -1,11 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-  FaInstagram,
-  FaLinkedin,
-  FaGithub,
-  FaArtstation,
-} from "react-icons/fa";
 import Container from "../Container";
 import {
   Arrow,
