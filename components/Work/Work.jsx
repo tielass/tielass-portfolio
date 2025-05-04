@@ -1,14 +1,7 @@
 import React from "react";
-import {
-  SectionContainer,
-  SvgContainer,
-  Svg,
-  Container,
-  Header,
-  Title,
-  Description,
-} from "./Work.styles";
+import { SectionContainer, Header, Title, Description } from "./Work.styles";
 import ProjectGallery from "../ProjectGallery/ProjectGallery";
+import Container from "../Container";
 
 const Work = () => {
   return (
@@ -21,8 +14,8 @@ const Work = () => {
             code, design, and illustration.
           </Description>
         </Header>
+        <ProjectGallery />
       </Container>
-      <ProjectGallery />
     </SectionContainer>
   );
 };

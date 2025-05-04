@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import {
+  FaInstagram,
+  FaLinkedin,
+  FaGithub,
+  FaArtstation,
+} from "react-icons/fa";
+import Container from "../Container";
 import {
   Arrow,
   ArrowContainer,
   Badge,
-  Container,
   Description,
   RedTitle,
   Title,
   Canvas,
 } from "./Hero.styles";
-import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 
 const Hero = ({ scrollToSection }) => {
   const canvasRef = useRef(null);
@@ -158,79 +163,112 @@ const Hero = ({ scrollToSection }) => {
     <>
       <Canvas ref={canvasRef} />
 
-      <Container
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+      {/* Social Links */}
+      <div
+        style={{
+          position: "absolute",
+          top: "1rem",
+          right: "1rem",
+          zIndex: 100,
+        }}
       >
-        <Badge
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <span>Frontend Developer • Graphic Artist • Illustrator</span>
-        </Badge>
+        {/* Add social links here */}
+      </div>
 
-        <Title
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          {/* Animate each letter */}
-          <motion.span
-            style={{ display: "inline-block", cursor: "pointer" }}
-            onClick={() => setIsBroken(true)} // Trigger the animation on click
-          >
-            {letters.map((letter, index) => (
-              <motion.span
-                key={index}
-                variants={letterVariants}
-                initial="initial"
-                animate={isBroken ? "broken" : "initial"}
-                style={{ display: "inline-block" }}
-              >
-                {letter}
-              </motion.span>
-            ))}
-          </motion.span>
-          <RedTitle>Technologist</RedTitle>
-        </Title>
-
-        <Description
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          I create at the intersection of code and design, blending technical
-          expertise with artistic vision to craft unique digital experiences.
-        </Description>
-
-        <ArrowContainer
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          onClick={() => scrollToSection("work")}
-        >
+      <div
+        style={{
+          position: "relative",
+          zIndex: 10,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          textAlign: "center",
+        }}
+      >
+        <Container>
           <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{
-              repeat: Number.POSITIVE_INFINITY,
-              duration: 1.5,
-              ease: "easeInOut",
-            }}
-            whileHover={{
-              y: [0, 15, 0],
-              transition: {
-                repeat: Number.POSITIVE_INFINITY,
-                duration: 0.75,
-                ease: "easeInOut",
-              },
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <Arrow />
+            <Badge
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <span>Frontend Developer • Graphic Artist • Illustrator</span>
+            </Badge>
+
+            <Title
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              {/* Animate each letter */}
+              <motion.span
+                style={{ display: "inline-block", cursor: "pointer" }}
+                onClick={() => setIsBroken(true)} // Trigger the animation on click
+              >
+                {letters.map((letter, index) => (
+                  <motion.span
+                    key={index}
+                    variants={letterVariants}
+                    initial="initial"
+                    animate={isBroken ? "broken" : "initial"}
+                    style={{ display: "inline-block" }}
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
+              </motion.span>
+              <RedTitle>Technologist</RedTitle>
+            </Title>
+
+            <Description
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              I create at the intersection of code and design, blending
+              technical expertise with artistic vision to craft unique digital
+              experiences.
+            </Description>
           </motion.div>
-        </ArrowContainer>
-      </Container>
+        </Container>
+      </div>
+
+      <ArrowContainer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1 }}
+        onClick={() => scrollToSection("work")}
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{
+            repeat: Number.POSITIVE_INFINITY,
+            duration: 1.5,
+            ease: "easeInOut",
+          }}
+          whileHover={{
+            y: [0, 15, 0],
+            transition: {
+              repeat: Number.POSITIVE_INFINITY,
+              duration: 0.75,
+              ease: "easeInOut",
+            },
+          }}
+        >
+          <Arrow />
+        </motion.div>
+      </ArrowContainer>
     </>
   );
 };

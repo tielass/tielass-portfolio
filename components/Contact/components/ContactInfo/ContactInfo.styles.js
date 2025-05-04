@@ -21,11 +21,19 @@ export const Grid = styled.div`
 `;
 
 export const Title = styled(motion.h2)`
-  font-size: 8rem; 
+  font-size: 4rem; /* Smaller default size for mobile */
   font-weight: bold;
   color: #ff6b6b;
-  margin-bottom: 1.5rem; 
-  letter-spacing: -0.05em; 
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.05em;
+
+  @media (min-width: 640px) {
+    font-size: 6rem; /* Medium size for tablets */
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 8rem; /* Full size for desktop */
+  }
 `;
 
 export const Description = styled(motion.div)`
@@ -92,10 +100,10 @@ export const FormContainer = styled(motion.div)`
 
 export const Form = styled.form`
   background-color: #2a2a2a;
-  border-radius: 0.5rem; 
+  border-radius: 0.5rem;
   padding: 2rem;
   @media (min-width: 768px) {
-    padding: 3rem; 
+    padding: 3rem;
   }
 `;
 
@@ -149,9 +157,11 @@ export const SubmitButton = styled.button`
   font-weight: 500;
   color: #0f0f0f;
   transition: all 0.3s;
-  background-color: ${(props) => (props.isSubmitting ? "rgba(255, 107, 107, 0.7)" : "#ff6b6b")};
+  background-color: ${(props) =>
+    props.isSubmitting ? "rgba(255, 107, 107, 0.7)" : "#ff6b6b"};
   &:hover {
-    background-color: ${(props) => (props.isSubmitting ? "rgba(255, 107, 107, 0.7)" : "#ff8787")};
+    background-color: ${(props) =>
+      props.isSubmitting ? "rgba(255, 107, 107, 0.7)" : "#ff8787"};
   }
 `;
 

@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import { ArrowUpRight, Download  } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
+import Container from "../Container"; // Import the universal Container
 import {
-  Container,
   Grid,
   ImageContainer,
   ImageWrapper,
@@ -19,6 +19,8 @@ import {
 const About = () => {
   return (
     <Container>
+      {" "}
+      {/* Replace the styled Container with our universal Container */}
       <Grid>
         <ImageContainer>
           <ImageWrapper>
@@ -27,6 +29,7 @@ const About = () => {
               src="/images/Mihaylov_about.jpg"
               alt="Portrait"
               fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
               priority
             />
@@ -83,11 +86,11 @@ const About = () => {
 
               {/* Download Resume Button */}
               <DownloadLink
-                href="/Mihail_Mihaylov_CV.pdf" 
+                href="/Mihail_Mihaylov_CV.pdf"
                 download="Mihail_Mihaylov_CV.pdf" // This sets the downloaded file name
               >
                 <span className="text-lg font-medium">Download Resume</span>
-                <Download  className="h-5 w-5 icon" />
+                <Download className="h-5 w-5 icon" />
               </DownloadLink>
             </ResumeContainer>
           </Description>

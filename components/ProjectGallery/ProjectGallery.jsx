@@ -125,13 +125,23 @@ const projects = [
     description: `Developed a responsive pre-employment screening portal that streamlines candidate background checks, document uploads. Integrated secure authentication, intuitive dashboards, and dynamic form components using modern frontend frameworks for a seamless user experience.\nDue to the confidential nature of the project, specific details and functionalities cannot be publicly disclosed.`,
     category: "development",
     image: "/placeholder.svg?height=600&width=800",
-    tools: ["NextJs", "Figma", "React", "NextAuth", "RestAPI", "SSO", "Azure-AD", "MUI DataGrid", "Recharts"],
+    tools: [
+      "NextJs",
+      "Figma",
+      "React",
+      "NextAuth",
+      "RestAPI",
+      "SSO",
+      "Azure-AD",
+      "MUI DataGrid",
+      "Recharts",
+    ],
     tags: ["Frontend development", "WebApp", "UI/UX Design", "NextJs", "React"],
   },
 ];
 
 const ProjectGallery = () => {
-  const [activeCategory, setActiveCategory] = useState("development"); 
+  const [activeCategory, setActiveCategory] = useState("development");
   const [hoveredProject, setHoveredProject] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -198,6 +208,7 @@ const ProjectGallery = () => {
                 src={project.image || "/placeholder.svg"}
                 alt={project.title}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="image"
               />
               <IconContainer className="icon-container">

@@ -1,7 +1,7 @@
 import React from "react";
 import ContactForm from "../ContactForm/ContactForm";
+import Container from "../../../Container"; // Import the universal Container
 import {
-  Container,
   Grid,
   Title,
   Description,
@@ -12,18 +12,14 @@ import {
   SocialLinks,
   SocialLink,
   FormContainer,
-  Form,
-  FormField,
-  Label,
-  Input,
-  Textarea,
-  SubmitButton,
   DecorativeCircle,
 } from "./ContactInfo.styles";
 
 const ContactInfo = () => {
   return (
     <Container>
+      {" "}
+      {/* Replace the styled Container with our universal Container */}
       <Grid>
         <div>
           <Title
@@ -42,7 +38,8 @@ const ContactInfo = () => {
             viewport={{ once: true }}
           >
             <p>
-              Interested in working together? Let's discuss your project and bring your vision to life.
+              Interested in working together? Let's discuss your project and
+              bring your vision to life.
             </p>
 
             <InfoSection>
@@ -61,13 +58,25 @@ const ContactInfo = () => {
               <InfoItem>
                 <InfoTitle>Connect</InfoTitle>
                 <SocialLinks>
-                  <SocialLink href="https://www.instagram.com/mmhikes/" target="_blank" rel="noopener noreferrer">
+                  <SocialLink
+                    href="https://www.instagram.com/mmhikes/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Instagram
                   </SocialLink>
-                  <SocialLink href="https://github.com/tielass" target="_blank" rel="noopener noreferrer">
+                  <SocialLink
+                    href="https://github.com/tielass"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Github
                   </SocialLink>
-                  <SocialLink href="https://www.linkedin.com/in/tielass/" target="_blank" rel="noopener noreferrer">
+                  <SocialLink
+                    href="https://www.linkedin.com/in/tielass/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     LinkedIn
                   </SocialLink>
                 </SocialLinks>
