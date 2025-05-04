@@ -209,27 +209,31 @@ export const LightboxImageContainer = styled.div`
   justify-content: flex-start; /* Align to top instead of center */
   min-height: 0;
   padding-top: 1rem; /* Add top padding */
+  /* Adjust bottom padding based on whether thumbnails exist */
+  padding-bottom: ${(props) => (props.hasThumbnails ? "1rem" : "0")};
 
   img {
     max-width: 100%;
     max-height: 55vh;
     border-radius: 8px;
     object-fit: contain;
+    /* Remove bottom margin when no thumbnails */
+    margin-bottom: ${(props) => (props.hasThumbnails ? "initial" : "0")};
 
     &.portrait {
-      max-height: 45vh;
+      max-height: 65vh; /* Increased from 45vh to make portrait images larger */
     }
   }
 
   @media (max-width: 768px) {
-    padding-bottom: 1.5rem;
+    padding-bottom: ${(props) => (props.hasThumbnails ? "1.5rem" : "0")};
     padding-top: 0.5rem; /* Less top padding on mobile */
 
     img {
       max-height: 38vh;
 
       &.portrait {
-        max-height: 32vh;
+        max-height: 40vh; /* Increased from 32vh to make portrait images larger on mobile */
       }
     }
   }
@@ -461,5 +465,59 @@ export const LightboxLink = styled.a`
 
   @media (max-width: 768px) {
     font-size: 0.7rem;
+  }
+`;
+
+export const LightboxFigmaContainer = styled.div`
+  margin-top: 1rem;
+  background-color: rgb(31, 30, 30);
+  border-radius: 6px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #f0f0f0;
+  }
+
+  iframe {
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    height: 450px;
+    background-color: #f0f0f0;
+
+    @media (max-width: 768px) {
+      height: 300px;
+    }
+  }
+
+  .figma-button {
+    margin-top: 0.75rem;
+    background-color: #ff6b6b;
+    color: #0f0f0f;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    align-self: flex-start;
+
+    &:hover {
+      background-color: #ff8383;
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 `;

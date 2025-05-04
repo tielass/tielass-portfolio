@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { ArrowUpRight, Code, Palette, PenTool, Tags } from "lucide-react";
+import {
+  ArrowUpRight,
+  Code,
+  Palette,
+  PenTool,
+  ExternalLink,
+} from "lucide-react";
+import projects from "../../helpers/projectsData"; // Import projects from helpers folder
 import {
   CategoryButton,
   ProjectGrid,
@@ -27,118 +34,8 @@ import {
   LightboxTool,
   LightboxDescription,
   LightboxLink,
+  LightboxFigmaContainer,
 } from "./ProjectGallery.styles";
-
-const projects = [
-  {
-    id: 1,
-    title: "Alchemist Verena",
-    description:
-      "In a world ablaze with mystic wonders, an adventurous alchemist emerges from the shadows, her spirit aflame with a relentless pursuit of arcane secrets. With her satchel filled with vials and her eyes brimming with curiosity, she traverses untamed landscapes, unearthing rare herbs and exotic ingredients to fuel her daring transmutations. Guided by an insatiable hunger for knowledge, she dances on the precipice of discovery, forever driven to unlock the mysteries that lie hidden within the alchemical arts.",
-    category: "illustration",
-    image:
-      "/images/illustration_images/mihail-mihaylov-alchemist-verena.jpg?height=600&width=800",
-    tools: ["Photoshop", "Wacom Intuos Pro"],
-    tags: ["Illustration", "Character Design"],
-  },
-  {
-    id: 2,
-    title: "Jeera",
-    description:
-      "Portrait of the travelling merchant known as Jeera. Every spring he sets off on a long journey accross the Iron Straits to provide the locals with goods they've never seen before and more often than not - ones they don't at all need.",
-    category: "illustration",
-    image:
-      "/images/illustration_images/mihail-mihaylov-jeera-mihaylov.jpg?height=600&width=800",
-    tools: ["Photoshop", "Wacom Intuos Pro"],
-    tags: ["Illustration", "Character Design"],
-    additionalImages: [
-      "/images/illustration_images/mihail-mihaylov-jeera-lineart-mihaylov.jpg",
-    ],
-  },
-  {
-    id: 3,
-    title: "Character Design Series",
-    description:
-      "A collection of illustrated characters exploring themes of technology and human connection.",
-    category: "illustration",
-    image:
-      "/images/illustration_images/mihail-mihaylov-ceremonial-dagger-mihaylovlr.jpg?height=600&width=800",
-    tools: ["Photoshop"],
-    tags: ["Illustration", "Character Design"],
-    additionalImages: [
-      "/images/illustration_images/mihail-mihaylov-alchemist-verena-2.jpg",
-      "/images/illustration_images/mihail-mihaylov-alchemist-verena-3.jpg",
-    ],
-  },
-  {
-    id: 4,
-    title: "Gift It",
-    description:
-      "Giftit is a webapp, which helps the user select the right gift, create events and invite friends to them and make use of the birthday calendar feature.",
-    category: "development",
-    image: "/images/development_images/giftit1.jpg?height=600&width=800",
-    link: "https://github.com/tielass/giftit",
-    tools: [
-      "Ruby on Rails",
-      "Javascript",
-      "HTML5",
-      "CSS3",
-      "Figma",
-      "PostgreSQL",
-    ],
-    tags: [
-      "WebApp",
-      "FullStack Development",
-      "Frontend Development",
-      "UI/UX Design",
-    ],
-    additionalImages: [
-      "/images/development_images/giftit2.jpg?height=600&width=800",
-      "/images/development_images/giftit3.jpg",
-      "/images/development_images/giftit4.jpg",
-      "/images/development_images/giftit5.jpg",
-      "/images/development_images/giftit6.jpg",
-    ],
-    thumbnailDimensions: { height: "80px", width: "40px" },
-  },
-  {
-    id: 5,
-    title: "SpaceX Monitoring",
-    description:
-      "A website that provides information about SpaceX launches, including launch dates, rocket types, and mission details. Users can filter launches by year and rocket type. The site is designed with the space-x api https://github.com/r-spacex/SpaceX-API",
-    category: "development",
-    image:
-      "/images/development_images/space-x-monitoring-5.jpg?height=600&width=800",
-    link: "https://spacexmonitoring.netlify.app/",
-    tools: ["React", "Javascript", "HTML5", "CSS3", "Figma", "SpaceX API"],
-    tags: ["SpaceX", "WebApp", "Frontend Development"],
-    additionalImages: [
-      "/images/development_images/space-x-monitoring-1.jpg",
-      "/images/development_images/space-x-monitoring-2.jpg",
-      "/images/development_images/space-x-monitoring-3.jpg",
-    ],
-    thumbnailDimensions: { height: "150px", width: "150px" },
-  },
-  {
-    id: 6,
-    title: "Pre-Employment Screening Portal",
-    description: `Developed a responsive pre-employment screening portal that streamlines candidate background checks, document uploads. Integrated secure authentication, intuitive dashboards, and dynamic form components using modern frontend frameworks for a seamless user experience.\nDue to the confidential nature of the project, specific details and functionalities cannot be publicly disclosed.`,
-    category: "development",
-    image: "/placeholder.svg?height=600&width=800",
-    tools: [
-      "NextJs",
-      "Figma",
-      "React",
-      "NextAuth",
-      "RestAPI",
-      "SSO",
-      "Azure-AD",
-      "MUI DataGrid",
-      "Recharts",
-    ],
-    tags: ["Frontend development", "WebApp", "UI/UX Design", "NextJs", "React"],
-  },
-];
 
 const ProjectGallery = () => {
   const [activeCategory, setActiveCategory] = useState("development");
@@ -171,9 +68,15 @@ const ProjectGallery = () => {
   }, [isLightboxOpen]);
 
   const openLightbox = (project) => {
+    // Only add additional images if they exist
+    const additionalImages =
+      project.additionalImages && project.additionalImages.length > 0
+        ? [project.image, ...project.additionalImages]
+        : [project.image];
+
     setSelectedProject({
       ...project,
-      additionalImages: [project.image, ...(project.additionalImages || [])],
+      additionalImages: additionalImages,
     });
     setCurrentImage(project.image);
     checkImageOrientation(project.image); // Check orientation when opening lightbox
@@ -276,37 +179,46 @@ const ProjectGallery = () => {
               <span className="close-icon">×</span>
             </LightboxCloseCircle>
             {/* Image on the left */}
-            <LightboxImageContainer>
+            <LightboxImageContainer
+              hasThumbnails={selectedProject.additionalImages?.length > 1}
+            >
               <img
                 src={currentImage.split("?")[0]}
                 alt={selectedProject.title}
-                className={
-                  imageOrientation
-                } /* Apply portrait/landscape class */
+                className={imageOrientation}
+                style={{
+                  marginBottom:
+                    !selectedProject.additionalImages ||
+                    selectedProject.additionalImages.length <= 1
+                      ? "0"
+                      : undefined,
+                }}
               />
-              {selectedProject.additionalImages?.length > 1 && (
-                <LightboxThumbnails>
-                  {selectedProject.additionalImages.map((image, index) => (
-                    <img
-                      key={index}
-                      src={image.split("?")[0]}
-                      alt={`Additional ${index + 1}`}
-                      onClick={() => {
-                        setCurrentImage(image);
-                        checkImageOrientation(image); // Check orientation when changing image
-                      }}
-                      style={{
-                        height:
-                          selectedProject.thumbnailDimensions?.height ||
-                          "200px",
-                        width:
-                          selectedProject.thumbnailDimensions?.width || "auto",
-                        objectFit: "cover",
-                      }}
-                    />
-                  ))}
-                </LightboxThumbnails>
-              )}
+              {selectedProject.additionalImages?.length > 1 &&
+                selectedProject.additionalImages && (
+                  <LightboxThumbnails>
+                    {selectedProject.additionalImages.map((image, index) => (
+                      <img
+                        key={index}
+                        src={image.split("?")[0]}
+                        alt={`Additional ${index + 1}`}
+                        onClick={() => {
+                          setCurrentImage(image);
+                          checkImageOrientation(image); // Check orientation when changing image
+                        }}
+                        style={{
+                          height:
+                            selectedProject.thumbnailDimensions?.height ||
+                            "200px",
+                          width:
+                            selectedProject.thumbnailDimensions?.width ||
+                            "auto",
+                          objectFit: "cover",
+                        }}
+                      />
+                    ))}
+                  </LightboxThumbnails>
+                )}
             </LightboxImageContainer>
 
             {/* Info on the right */}
@@ -333,6 +245,25 @@ const ProjectGallery = () => {
                   </LightboxLink>
                 </LightboxToolsContainer>
               )}
+              {/* Figma Prototype */}
+              {selectedProject?.figmaLink && (
+                <LightboxFigmaContainer>
+                  <h3>Figma Prototype</h3>
+                  <iframe
+                    src={`${selectedProject.figmaLink}`}
+                    allowFullScreen
+                  />
+                  <a
+                    href={selectedProject.figmaLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="figma-button"
+                  >
+                    <ExternalLink size={16} />
+                    Open in Figma
+                  </a>
+                </LightboxFigmaContainer>
+              )}
               {/* Tools */}
               <LightboxToolsContainer>
                 <h3>Tools</h3>
@@ -351,7 +282,6 @@ const ProjectGallery = () => {
                   ))}
                 </div>
               </LightboxToolsContainer>
-              
             </LightboxRightContainer>
           </LightboxContent>
         </LightboxOverlay>
