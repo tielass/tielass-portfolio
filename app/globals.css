@@ -1,7 +1,7 @@
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a; /* Always dark background */
+  --foreground: #ededed; /* Always light text */
   --font-sans: 'Inter', sans-serif;
 }
 

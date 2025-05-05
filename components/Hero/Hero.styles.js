@@ -61,6 +61,8 @@ export const ArrowContainer = styled(motion.div)`
   bottom: 3rem;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 100; 
+
   &:hover {
     cursor: pointer;
   }
@@ -77,6 +79,6 @@ export const RedTitle = styled.span`
   margin-top: -2rem;
 
   @media (max-width: 640px) {
-    margin-top: 0; 
+    margin-top: 0;
   }
 `;
