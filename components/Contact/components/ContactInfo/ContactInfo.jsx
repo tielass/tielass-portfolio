@@ -36,8 +36,6 @@ const ContactInfo = () => {
 
   return (
     <Container>
-      {" "}
-      {/* Replace the styled Container with our universal Container */}
       <Grid>
         <div>
           <Title

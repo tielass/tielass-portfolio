@@ -8,6 +8,15 @@ const StyledContainer = styled.div`
   padding-left: ${(props) => (props.noPadding ? "0" : "1.5rem")};
   padding-right: ${(props) => (props.noPadding ? "0" : "1.5rem")};
   position: relative;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  box-sizing: border-box;
+
+  @media (max-width: 1366px) {
+    max-width: ${(props) =>
+      props.maxWidth ? `calc(${props.maxWidth} * 0.95)` : "1330px"};
+    padding-left: ${(props) => (props.noPadding ? "0" : "2.5rem")};
+    padding-right: ${(props) => (props.noPadding ? "0" : "2.5rem")};
+  }
 
   @media (min-width: 640px) {
     padding-left: ${(props) => (props.noPadding ? "0" : "2rem")};
@@ -20,8 +29,21 @@ const StyledContainer = styled.div`
   }
 
   @media (min-width: 1440px) {
-    padding-left: ${(props) => (props.noPadding ? "0" : "1rem")};
-    padding-right: ${(props) => (props.noPadding ? "0" : "1rem")};
+    padding-left: ${(props) => (props.noPadding ? "0" : "1.5rem")};
+    padding-right: ${(props) => (props.noPadding ? "0" : "1.5rem")};
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 640px) {
+    padding-left: ${(props) => (props.noPadding ? "0" : "1.5rem")};
+    padding-right: ${(props) => (props.noPadding ? "0" : "1.5rem")};
+    
+  }
+
+  /* Extra small screens */
+  @media (max-width: 480px) {
+    padding-left: ${(props) => (props.noPadding ? "0" : "1.5rem")};
+    padding-right: ${(props) => (props.noPadding ? "0" : "1.5rem")};
   }
 `;
 

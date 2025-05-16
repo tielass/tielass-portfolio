@@ -5,6 +5,16 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 0.75rem;
+  }
 `;
 
 export const CategoryButton = styled.button`
@@ -31,8 +41,11 @@ export const ProjectGrid = styled.div`
   grid-template-columns: 1fr;
   gap: 2rem;
   margin-top: 3rem;
-  @media (max-width: 640px) {
-    grid-template-columns: repeat(1, 1fr);
+  justify-items: start;
+
+  @media (max-width: 768px) {
+    justify-items: center;
+    width: 100%;
   }
   @media (min-width: 1024px) {
     grid-template-columns: repeat(3, 1fr);
@@ -138,10 +151,10 @@ export const FiltersContainer = styled.div`
   gap: 1rem;
   justify-content: flex-start;
 
-  @media (max-width: 640px) {
-    justify-content: justify-content: center;
-    flex-wrap: wrap;
-    margin: 0 0.5rem;
+  @media (max-width: 768px) {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
 `;
 
@@ -162,79 +175,104 @@ export const LightboxOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
   padding: 1rem;
+  box-sizing: border-box;
 `;
 
 export const LightboxContent = styled.div`
   position: relative;
   background-color: rgb(20, 20, 20);
-  padding: 4rem 0 1.5rem;
+  padding: 2.5rem 0 1rem;
   border-radius: 8px;
-  width: 95%;
-  height: 90%;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  max-height: 95vh;
   display: flex;
-  overflow: hidden;
-  align-items: flex-start; /* Align both containers to the top */
+  flex-direction: column;
+  overflow: auto;
+  align-items: center;
+  box-sizing: border-box;
 
   @media (min-width: 768px) {
+    flex-direction: row;
     width: 90%;
+    max-width: 900px;
+    padding: 4rem 0 1.5rem;
+    align-items: flex-start;
+    height: 90%;
+    max-height: 90vh;
   }
 
   @media (min-width: 1024px) {
     width: 85%;
+    max-width: 1100px;
   }
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    overflow-y: auto;
-    padding: 2rem 0 2rem;
-    height: auto;
-    max-height: 90%;
+  @media (max-width: 480px) {
+    padding: 1rem 0 0.5rem;
+    max-width: 99vw;
+    border-radius: 4px;
   }
 `;
 
 export const LightboxImageContainer = styled.div`
-  flex: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0 1.5rem 1rem;
-  justify-content: flex-start; /* Align to top instead of center */
+  justify-content: flex-start;
   min-height: 0;
-  padding-top: 1rem; /* Add top padding */
-  /* Adjust bottom padding based on whether thumbnails exist */
+  padding-top: 1rem;
   padding-bottom: ${(props) => (props.hasThumbnails ? "1rem" : "0")};
+  width: 100%;
+  box-sizing: border-box;
 
   img {
     max-width: 100%;
+    width: 100%;
+    height: auto;
     max-height: 55vh;
     border-radius: 8px;
     object-fit: contain;
-    /* Remove bottom margin when no thumbnails */
     margin-bottom: ${(props) => (props.hasThumbnails ? "initial" : "0")};
-
     &.portrait {
-      max-height: 65vh; /* Increased from 45vh to make portrait images larger */
+      max-height: 65vh;
     }
+  }
+
+  @media (min-width: 768px) {
+    flex: 3;
+    width: auto;
   }
 
   @media (max-width: 768px) {
     padding-bottom: ${(props) => (props.hasThumbnails ? "1.5rem" : "0")};
-    padding-top: 0.5rem; /* Less top padding on mobile */
-
+    padding-top: 0.5rem;
+    width: 100%;
+    flex: none;
     img {
       max-height: 38vh;
-
       &.portrait {
-        max-height: 40vh; /* Increased from 32vh to make portrait images larger on mobile */
+        max-height: 40vh;
       }
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 0.25rem 0.5rem;
+    img {
+      max-width: 100vw;
+      width: 100vw;
+      height: auto;
+      max-height: 32vh;
     }
   }
 `;
@@ -337,14 +375,15 @@ export const LightboxDescription = styled.p`
 `;
 
 export const LightboxRightContainer = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
   padding: 0 1.5rem 1.5rem;
-  padding-top: 1rem; /* Match top padding with image container */
+  padding-top: 1rem;
   max-height: 100%;
   overflow-y: auto;
   justify-content: flex-start;
+  width: 100%;
+  flex: none;
 
   /* Hide scrollbar but keep functionality */
   scrollbar-width: thin;
@@ -364,11 +403,18 @@ export const LightboxRightContainer = styled.div`
     border-radius: 3px;
   }
 
+  @media (min-width: 768px) {
+    flex: 1;
+    width: auto;
+  }
+
   @media (max-width: 768px) {
     padding: 0 1.5rem 1.5rem;
-    padding-top: 1.5rem; /* More top padding on mobile between sections */
+    padding-top: 1.5rem;
     max-height: none;
     overflow-y: visible;
+    width: 100%;
+    flex: none;
   }
 `;
 

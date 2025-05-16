@@ -26,14 +26,6 @@ export const Svg = styled.svg`
   height: 6.25rem;
 `;
 
-export const Container = styled.div`
-  max-width: 1200px;
-  margin-bottom: 4rem;
-  padding: 0 1rem;
-  position: relative;
-  z-index: 10;
-`;
-
 export const Header = styled.div`
   margin-bottom: 4rem;
   max-width: 48rem;
@@ -45,8 +37,25 @@ export const Title = styled.h1`
   margin-bottom: 1.5rem;
   color: #ff6b6b;
   letter-spacing: -0.05em;
-   @media (max-width: 640px) {
+
+  @media (max-width: 1366px) {
+    font-size: 6.5rem;
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 5.5rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 5rem;
+  }
+
+  @media (max-width: 640px) {
     font-size: 4.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 3.5rem;
   }
 `;
 

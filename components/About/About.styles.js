@@ -4,9 +4,22 @@ import { motion } from "framer-motion";
 export const Container = styled.div`
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   position: relative;
   z-index: 10;
+
+  @media (max-width: 1366px) {
+    padding: 0 2rem;
+    max-width: 95%;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 0.75rem;
+  }
 `;
 
 export const Grid = styled.div`
@@ -83,6 +96,26 @@ export const Title = styled(motion.h2)`
   color: #ff6b6b;
   margin-bottom: 1.5rem;
   letter-spacing: -0.05em;
+
+  @media (max-width: 1366px) {
+    font-size: 6.5rem;
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 5.5rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 5rem;
+  }
+
+  @media (max-width: 640px) {
+    font-size: 4.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 3.5rem;
+  }
 `;
 
 export const Description = styled(motion.div)`
@@ -91,6 +124,16 @@ export const Description = styled(motion.div)`
   gap: 1.5rem;
   font-size: 1.125rem;
   color: #a0a0a0;
+
+  @media (max-width: 1366px) {
+    font-size: 1.05rem;
+    gap: 1.2rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    gap: 1rem;
+  }
 `;
 
 export const ResumeLink = styled.a`

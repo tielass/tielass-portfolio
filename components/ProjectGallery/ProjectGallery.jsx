@@ -36,6 +36,7 @@ import {
   LightboxLink,
   LightboxFigmaContainer,
 } from "./ProjectGallery.styles";
+import Container from "../Container";
 
 const ProjectGallery = () => {
   const [activeCategory, setActiveCategory] = useState("development");
@@ -113,7 +114,7 @@ const ProjectGallery = () => {
   ];
 
   return (
-    <div>
+    <Container>
       <FiltersContainer>
         {categories.map((category) => {
           const Icon = category.icon;
@@ -286,7 +287,7 @@ const ProjectGallery = () => {
           </LightboxContent>
         </LightboxOverlay>
       )}
-    </div>
+    </Container>
   );
 };
 

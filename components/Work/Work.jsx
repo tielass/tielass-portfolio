@@ -5,8 +5,8 @@ import Container from "../Container";
 
 const Work = () => {
   return (
-    <SectionContainer>
-      <Container>
+    <Container>
+      <SectionContainer>
         <Header>
           <Title>Work</Title>
           <Description>
@@ -15,8 +15,8 @@ const Work = () => {
           </Description>
         </Header>
         <ProjectGallery />
-      </Container>
-    </SectionContainer>
+      </SectionContainer>
+    </Container>
   );
 };
 

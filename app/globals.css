@@ -31,6 +31,43 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Responsive scaling for different screen sizes */
+@media (max-width: 1366px) {
+  html {
+    font-size: 90%; /* 14.4px instead of 16px - better for smaller laptops */
+  }
+  
+  h1, h2, h3 {
+    line-height: 1.1;
+  }
+}
+
+/* Further scaling for tablets and mobile */
+@media (max-width: 768px) {
+  html {
+    font-size: 80%; /* 12.8px - reduced size for mobile devices */
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  html {
+    font-size: 75%; /* 12px - even smaller for very small screens */
+  }
+  
+  /* Fix for iPhone XR and similar mobile devices */
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+  
+  /* Ensure content stays within viewport on mobile */
+  main, section, div, header, footer {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { ArrowUpRight, Download } from "lucide-react";
-import Container from "../Container"; // Import the universal Container
+import Container from "../Container";
 import {
   Grid,
   ImageContainer,
@@ -19,8 +19,6 @@ import {
 const About = () => {
   return (
     <Container>
-      {" "}
-      {/* Replace the styled Container with our universal Container */}
       <Grid>
         <ImageContainer>
           <ImageWrapper>

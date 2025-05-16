@@ -4,9 +4,22 @@ import { motion } from "framer-motion";
 export const Container = styled.div`
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   position: relative;
   z-index: 10;
+
+  @media (max-width: 1366px) {
+    padding: 0 2rem;
+    max-width: 95%;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 5rem;
+  }
+
+  // @media (max-width: 480px) {
+  //   padding: 0 0.75rem;
+  // }
 `;
 
 export const Grid = styled.div`
@@ -34,6 +47,14 @@ export const Title = styled(motion.h2)`
   @media (min-width: 1024px) {
     font-size: 8rem; /* Full size for desktop */
   }
+
+  @media (max-width: 1366px) and (min-width: 1024px) {
+    font-size: 6.5rem; /* Slightly smaller for small laptops */
+  }
+
+  @media (max-width: 480px) {
+    font-size: 3.5rem;
+  }
 `;
 
 export const Description = styled(motion.div)`
@@ -43,6 +64,21 @@ export const Description = styled(motion.div)`
   font-size: 1.25rem; /* text-xl in Tailwind CSS */
   color: #a0a0a0;
   max-width: 32rem; /* max-w-xl in Tailwind CSS */
+
+  @media (max-width: 1366px) {
+    font-size: 1.15rem;
+    gap: 1.75rem;
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 1.1rem;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    gap: 1.25rem;
+  }
 `;
 
 export const InfoSection = styled.div`
@@ -62,6 +98,14 @@ export const InfoTitle = styled.h3`
   font-weight: 500;
   color: #ff6b6b;
   margin-bottom: 0.5rem; /* mb-2 in Tailwind CSS */
+
+  @media (max-width: 1366px) {
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 export const InfoLink = styled.a`
