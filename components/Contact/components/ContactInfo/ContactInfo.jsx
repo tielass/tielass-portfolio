@@ -123,8 +123,6 @@ const ContactInfo = () => {
           viewport={{ once: true }}
         >
           <ContactForm />
-          <DecorativeCircle className="top-right" />
-          <DecorativeCircle className="bottom-left" />
         </FormContainer>
       </Grid>
     </Container>

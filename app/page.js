@@ -109,7 +109,7 @@ export default function Home() {
       </StyledSection>
 
       {/* About */}
-      <section ref={(el) => (sectionsRef.current.about = el)}>
+      <section ref={(el) => (sectionsRef.current.about = el)} style={{ padding: "5rem 0" }}>
         <About />
       </section>
 

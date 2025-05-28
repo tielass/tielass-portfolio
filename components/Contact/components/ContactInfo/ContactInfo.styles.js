@@ -25,11 +25,11 @@ export const Container = styled.div`
 export const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  gap: 4rem; /* gap-16 in Tailwind CSS */
+  gap: 4rem; 
   align-items: center;
-  min-height: 80vh;
+  // min-height: 80vh;
   @media (min-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr); /* lg:grid-cols-2 in Tailwind CSS */
+    grid-template-columns: repeat(2, 1fr); 
   }
 `;
 

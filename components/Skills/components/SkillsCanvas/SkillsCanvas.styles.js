@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 
 export const SkillsCanvasContainer = styled.div`
-  height: 60vh;
+  width: 100%;
+  aspect-ratio: 1;
   position: relative;
   display: none;
   @media (min-width: 1024px) {

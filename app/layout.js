@@ -8,9 +8,9 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Creative Portfolio",
+  title: "Mihail Mihaylov - Frontend Developer, Illustrator",
   description:
-    "Portfolio of a frontend developer, graphic artist, and illustrator",
+    "I'm a frontend developer and illustrator based in Berlin. I'm passionate about creating beautiful and functional web experiences.",
 };
 
 export default function RootLayout({ children }) {

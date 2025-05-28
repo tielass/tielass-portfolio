@@ -124,6 +124,7 @@ export const Description = styled(motion.div)`
   gap: 1.5rem;
   font-size: 1.125rem;
   color: #a0a0a0;
+  line-height: 1.5;
 
   @media (max-width: 1366px) {
     font-size: 1.05rem;
@@ -142,6 +143,10 @@ export const ResumeLink = styled.a`
   gap: 0.5rem;
   color: #ff6b6b;
   transition: all 0.3s;
+  padding-right: 1.5rem; /* Reserve space for arrow movement */
+  overflow: hidden;
+  white-space: nowrap;
+
   &:hover {
     gap: 0.75rem;
     color: rgb(253, 197, 197);

@@ -32,8 +32,6 @@ const About = () => {
               priority
             />
           </ImageWrapper>
-          <BlurredCircle className="bottom-right" />
-          <BlurredCircle className="top-left" />
         </ImageContainer>
 
         <Content>
