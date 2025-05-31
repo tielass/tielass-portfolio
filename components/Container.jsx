@@ -8,7 +8,6 @@ const StyledContainer = styled.div`
   padding-left: ${(props) => (props.noPadding ? "0" : "1.5rem")};
   padding-right: ${(props) => (props.noPadding ? "0" : "1.5rem")};
   position: relative;
-  overflow-x: hidden; /* Prevent horizontal overflow */
   box-sizing: border-box;
 
   @media (max-width: 1366px) {
