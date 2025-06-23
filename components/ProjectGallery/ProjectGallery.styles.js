@@ -41,7 +41,7 @@ export const ProjectGrid = styled.div`
   grid-template-columns: 1fr;
   gap: 2rem;
   margin-top: 3rem;
-  justify-items: start;
+  justify-items: stretch;
 
   @media (max-width: 768px) {
     justify-items: center;
@@ -61,6 +61,10 @@ export const ProjectCard = styled.div`
   max-width: 100%;
   box-sizing: border-box;
   opacity: 1;
+  height: 400px; /* Fixed height for alignment */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   &:hover {
     cursor: pointer;
   }
@@ -137,6 +141,10 @@ export const ProjectTitle = styled.h3`
   font-size: 1.25rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 
 export const ProjectDescription = styled.p`
@@ -144,7 +152,9 @@ export const ProjectDescription = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
+
 export const FiltersContainer = styled.div`
   display: flex;
   flex-wrap: wrap;

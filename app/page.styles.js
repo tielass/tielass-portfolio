@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 
 export const StyledSection = styled.section`
-  min-height: 100vh;
+  // min-height: 100vh;
   padding: 5rem 0;
   position: relative;
   background: radial-gradient(circle, #1a1a1a 0%, #0a0a0a 100%);
