@@ -577,3 +577,55 @@ export const LightboxFigmaContainer = styled.div`
     }
   }
 `;
+
+export const LightboxImageWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  &:hover .image-hover-overlay {
+    opacity: 1;
+  }
+`;
+
+export const LightboxImageHoverOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 8px;
+  z-index: 10;
+`;
+
+export const LightboxImageActionButton = styled.button`
+  background-color: #ff6b6b;
+  color: #0f0f0f;
+  border: none;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+
+  &:hover {
+    background-color: #ff8383;
+    transform: scale(1.1);
+  }
+
+  svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+`;

@@ -5,6 +5,8 @@ import {
   Palette,
   PenTool,
   ExternalLink,
+  Download,
+  Maximize2,
 } from "lucide-react";
 import projects from "../../helpers/projectsData"; // Import projects from helpers folder
 import {
@@ -35,6 +37,9 @@ import {
   LightboxDescription,
   LightboxLink,
   LightboxFigmaContainer,
+  LightboxImageWrapper,
+  LightboxImageHoverOverlay,
+  LightboxImageActionButton,
 } from "./ProjectGallery.styles";
 import Container from "../Container";
 
@@ -101,6 +106,23 @@ const ProjectGallery = () => {
       }
     };
     img.src = imgSrc.split("?")[0]; // Remove query params
+  };
+
+  // Function to open image in new tab
+  const openImageInNewTab = (imageSrc) => {
+    window.open(imageSrc.split("?")[0], "_blank");
+  };
+
+  // Function to download image
+  const downloadImage = (imageSrc, projectTitle) => {
+    const link = document.createElement("a");
+    link.href = imageSrc.split("?")[0];
+    link.download = `${projectTitle}-image.${
+      imageSrc.split(".").pop().split("?")[0]
+    }`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const filteredProjects = activeCategory
@@ -183,18 +205,40 @@ const ProjectGallery = () => {
             <LightboxImageContainer
               hasThumbnails={selectedProject.additionalImages?.length > 1}
             >
-              <img
-                src={currentImage.split("?")[0]}
-                alt={selectedProject.title}
-                className={imageOrientation}
-                style={{
-                  marginBottom:
-                    !selectedProject.additionalImages ||
-                    selectedProject.additionalImages.length <= 1
-                      ? "0"
-                      : undefined,
-                }}
-              />
+              <LightboxImageWrapper>
+                <img
+                  src={currentImage.split("?")[0]}
+                  alt={selectedProject.title}
+                  className={imageOrientation}
+                  style={{
+                    marginBottom:
+                      !selectedProject.additionalImages ||
+                      selectedProject.additionalImages.length <= 1
+                        ? "0"
+                        : undefined,
+                  }}
+                />
+                <LightboxImageHoverOverlay className="image-hover-overlay">
+                  <LightboxImageActionButton
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openImageInNewTab(currentImage);
+                    }}
+                    title="Open in new tab"
+                  >
+                    <Maximize2 />
+                  </LightboxImageActionButton>
+                  <LightboxImageActionButton
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      downloadImage(currentImage, selectedProject.title);
+                    }}
+                    title="Download image"
+                  >
+                    <Download />
+                  </LightboxImageActionButton>
+                </LightboxImageHoverOverlay>
+              </LightboxImageWrapper>
               {selectedProject.additionalImages?.length > 1 &&
                 selectedProject.additionalImages && (
                   <LightboxThumbnails>
