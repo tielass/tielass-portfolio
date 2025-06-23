@@ -438,6 +438,22 @@ const projects = [
     ],
     thumbnailDimensions: { height: "100px", width: "auto" },
   },
+  {
+    id: 34,
+    title: "Asfalting Ltd",
+    description:
+      "Modern website for a road construction and maintenance company.",
+    category: "development",
+    image: "/images/development_images/asfaltingltd-1.webp",
+    tools: ["React", "Javascript", "Styled Components", "Figma"],
+    tags: ["React", "Web Design", "Concept Art"],
+    link: "https://asfaltingltd.netlify.app/",
+    additionalImages: [
+      "/images/development_images/asfaltingltd-2.webp",
+      "/images/development_images/asfaltingltd-3.webp",
+    ],
+    thumbnailDimensions: { height: "100px", width: "auto" },
+  },
 ];
 
 export default projects;
