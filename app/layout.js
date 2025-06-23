@@ -11,6 +11,11 @@ export const metadata = {
   title: "Mihail Mihaylov - Frontend Developer, Illustrator",
   description:
     "I'm a frontend developer and illustrator based in Berlin. I'm passionate about creating beautiful and functional web experiences.",
+  icons: {
+    icon: "/tielass-favicon.svg",
+    shortcut: "/tielass-favicon.svg",
+    apple: "/tielass-favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }) {
